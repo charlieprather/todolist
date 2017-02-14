@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hold Shift to Check Multiple Checkboxes</title>
+</head>
+<body>
+  <style>
+  
+
+    html {
+      font-family: sans-serif;
+      background:#00a960;
+      -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 10s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 10s;
+    animation-iteration-count: 20;
+
+    }
+
+    .inbox {
+      max-width:400px;
+      margin:50px auto;
+      background:white;
+      border-radius:5px;
+      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
+    }
+
+    .item {
+      display:flex;
+      align-items:center;
+    }
+
+    .item:last-child {
+      border-bottom:0;
+    }
+
+
+  
+    input:checked + p {
+      background:#F9F9F9;
+      text-decoration: line-through;
+    }
+
+    input[type="checkbox"] {
+      margin:20px;
+    }
+
+    p {
+      margin:0;
+      padding:20px;
+      transition:background 0.2s;
+      flex:1;
+      font-family:'helvetica neue';
+      font-size: 20px;
+      font-weight: 200;
+      border-left: 0px solid #D1E2FF;
+    }
+
+    .details {
+      text-align: center;
+      font-size: 15px;
+    }
+
+    @-webkit-keyframes example {
+    from {background-color: #00a960;}
+    to {background-color: black;}
+}
+
+
+  </style>
+  
+
+  <div class="inbox">
+    <div class="item">
+      <p>THINGS TO DO</p>
+    </div>
+
+
+        <div class="item">
+
+      <input type="checkbox">
+      <p>Grocery Shop</p>
+    </div>
+
+    <div class="item">
+      <input type="checkbox">
+      <p>GYM</p>
+    </div>
+
+    <div class="item">
+      <input type="checkbox">
+      <p>Code on proj. 3hr</p>
+    </div>
+
+
+    <div class="item">
+      <input type="checkbox">
+      <p>Shower</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Make Dinner</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Stretch</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>w-2</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Call Mom</p>
+    </div>
+  </div>
+
+<script>
+
+const checkboxes = document.querySelectorAll('.inbox [type = "checkbox"]');
+
+let lastChecked;
+
+function handleCheck(e){
+
+  let inBetween = false;
+
+  if(e.shiftKey && this.checked){
+    checkboxes.forEach(checkbox =>{
+if(checkbox === this || checkbox === lastChecked){
+inBetween =!inBetween;
+}  
+        
+if(inBetween){
+
+  checkbox.checked = true;
+}
+
+});
+
+}
+lastChecked = this;
+
+console.log(e);
+
+}
+
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+
+</script>
+</body>
+</html>
